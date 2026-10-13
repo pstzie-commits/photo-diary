@@ -1,17 +1,4 @@
 {
  "version": 1,
- "entries": [
-  {
-   "id": "eac0dff6-43bd-4b89-bf50-1ff401ddc223",
-   "date": "2026-10-13",
-   "title": "자동 시험 06:32:36",
-   "mood": 3,
-   "memo": "",
-   "photos": [
-    "abfe3807-8873-42c1-ba89-e1b485d843fe.jpg"
-   ],
-   "created_at": "2026-10-13T06:32:39.503Z",
-   "updated_at": "2026-10-13T06:32:39.503Z"
-  }
- ]
+ "entries": []
 }
