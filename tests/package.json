@@ -1,0 +1,14 @@
+{
+  "name": "photo-diary-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:sql": "node sql.test.mjs ../supabase/setup.sql",
+    "test:app": "node app.test.mjs ./shots",
+    "test:github": "node github.test.mjs ./shots"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.2.17",
+    "playwright-core": "1.48.2"
+  }
+}
