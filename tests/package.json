@@ -5,7 +5,8 @@
   "scripts": {
     "test:sql": "node sql.test.mjs ../supabase/setup.sql",
     "test:app": "node app.test.mjs ./shots",
-    "test:github": "node github.test.mjs ./shots"
+    "test:github": "node github.test.mjs ./shots",
+    "test:live": "node live.test.mjs"
   },
   "devDependencies": {
     "@electric-sql/pglite": "0.2.17",
