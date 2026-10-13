@@ -1,11 +1,14 @@
 import * as store from './store.js';
-import { MAX_PHOTOS, PAGE_SIZE, TITLE_MAX, MEMO_MAX } from './config.js';
+import {
+  MAX_PHOTOS, PAGE_SIZE, TITLE_MAX, MEMO_MAX, GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH,
+} from './config.js';
 import { resizeImage } from './image.js';
 import {
   MOODS, moodOf, moodFace, icon, esc, todayStr, formatDate, defaultTitle, toast, confirmDialog,
 } from './ui.js';
 
 const app = document.getElementById('app');
+const GUIDE_URL = `https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/blob/${GITHUB_BRANCH}/GUIDE.md`;
 let user = null;
 let renderId = 0;          // 화면이 바뀌면 이전 화면의 늦은 비동기 작업을 무시한다
 let leaveGuard = null;     // 작성 중일 때 다른 화면으로 가기 전에 확인한다
@@ -483,7 +486,8 @@ function renderLogin() {
       <form id="login-form" class="login-form">
         <label class="field"><span class="label">GitHub 열쇠 (토큰)</span>
           <input type="password" name="token" autocomplete="off" spellcheck="false" placeholder="github_pat_..." required></label>
-        <p class="hint">열쇠는 이 기기에만 보관되고, 로그아웃하면 지워져요.</p>
+        <p class="hint">열쇠는 이 기기에만 보관되고, 로그아웃하면 지워져요.
+          <a class="link" href="${GUIDE_URL}" target="_blank" rel="noopener">열쇠 만드는 방법</a></p>
         <p class="error" id="login-error" hidden>열쇠가 맞지 않거나 만료됐어요.</p>
         <button class="btn btn-primary btn-block" type="submit">로그인</button>
       </form>`}

@@ -232,6 +232,7 @@ input:focus, textarea:focus { outline: 2px solid color-mix(in srgb, var(--brown)
 .login-lead { text-align: center; font-weight: 500; margin-top: 4px; }
 .login-form { display: grid; gap: 16px; margin-top: 12px; }
 .error { color: var(--danger); font-size: 13px; }
+.link { color: var(--brown); text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---------- 확인 창 · 알림 ---------- */
 .dialog {
