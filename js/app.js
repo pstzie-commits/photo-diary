@@ -68,7 +68,7 @@ window.addEventListener('beforeunload', (e) => {
 
 function errorMessage(e, action) {
   if (e?.code === 'unauthorized') return '열쇠가 만료됐거나 맞지 않아요. 로그아웃 후 다시 로그인해주세요.';
-  if (e?.code === 'forbidden') return '열쇠에 쓰기 권한이 없어요. 열쇠 설정을 확인해주세요.';
+  if (e?.code === 'forbidden') return "열쇠에 쓰기 권한이 없어요. 열쇠 설정에서 Contents를 'Read and write'로 바꿔주세요.";
   return `${action}하지 못했어요. 다시 시도해주세요.`;
 }
 
@@ -506,8 +506,12 @@ function renderLogin() {
       user = await store.getUser();
       toast('로그인했어요');
       go('#/', { replace: true });
-    } catch {
-      app.querySelector('#login-error').hidden = false;
+    } catch (err) {
+      const error = app.querySelector('#login-error');
+      if (err?.code === 'no_write') {
+        error.textContent = "이 열쇠는 쓰기 권한이 없어요. GitHub 열쇠 설정에서 photo-diary 저장소를 고르고, Contents를 'Read and write'로 바꿔주세요.";
+      }
+      error.hidden = false;
       btn.disabled = false;
     }
   });

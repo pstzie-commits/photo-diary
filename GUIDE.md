@@ -26,6 +26,15 @@
 2. 복사한 열쇠 붙여넣기 → **로그인**
 3. 오른쪽 아래 **+** 버튼이 보이면 성공
 
+## "쓰기 권한이 없어요"라고 나올 때
+열쇠를 새로 만들 필요 없이 권한만 고치면 돼요.
+1. **https://github.com/settings/personal-access-tokens** 열기 (Fine-grained tokens 목록)
+2. 만든 열쇠 이름(예: `photo-diary 휴대폰`) 누르기 → **Edit**
+3. **Repository access**: **Only select repositories**에 `photo-diary`가 있는지 확인 (없으면 추가)
+4. **Repository permissions** → **Contents** 를 **Read and write** 로
+   ("Read-only"로 돼 있으면 쓰기가 안 돼요. 다른 권한은 켤 필요 없어요)
+5. 맨 아래 **Update** → 앱에서 다시 로그인
+
 ## 홈 화면에 앱처럼 추가 (선택)
 - 아이폰 Safari: 공유 버튼 → **홈 화면에 추가**
 - 안드로이드 Chrome: 오른쪽 위 ⋮ → **홈 화면에 추가**

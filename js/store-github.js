@@ -193,7 +193,7 @@ export async function getUser() {
   return token() ? { name: OWNER } : null;
 }
 
-// 열쇠로 저장소 정보를 읽어, 이 저장소에 쓸 수 있는 열쇠인지 확인한 뒤 기기에 보관한다.
+// 열쇠로 저장소 정보를 읽고, 실제로 쓸 수 있는 열쇠인지 확인한 뒤 기기에 보관한다.
 export async function signIn({ token: t }) {
   t = (t || '').trim();
   if (!t) throw fail('invalid_credentials');
@@ -204,6 +204,16 @@ export async function signIn({ token: t }) {
   if (!res.ok) throw fail('invalid_credentials', res.status);
   const repo = await res.json();
   if (!repo.permissions?.push) throw fail('invalid_credentials');
+  // 저장소 정보는 읽기 전용 열쇠로도 읽히므로, 아무 데도 연결되지 않는 작은 조각을 올려 쓰기 권한을 확인한다
+  // (커밋·파일·이력에 남지 않음).
+  const probe = await fetch(`${REPO_API}/git/blobs`, {
+    method: 'POST',
+    headers: { Accept: 'application/vnd.github+json', Authorization: `Bearer ${t}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: 'photo-diary write check', encoding: 'utf-8' }),
+    cache: 'no-store',
+  });
+  if (probe.status === 403 || probe.status === 404) throw fail('no_write', probe.status);
+  if (!probe.ok) throw fail('invalid_credentials', probe.status);
   localStorage.setItem(TOKEN_KEY, t);
   cache = null;
 }

@@ -186,19 +186,15 @@ await me.waitForSelector('.summary');
 check(entriesAtHead().length === 1 && photosAtHead().length === 0, '삭제: 기록과 사진 파일 함께 삭제');
 check(await me.locator('.summary-total').textContent() === '1', '삭제 후 요약 1개');
 
-// 읽기 전용 열쇠 → 저장 시 안내
+// 읽기 전용 열쇠 → 로그인 단계에서 바로 안내
 await me.click('[data-action=logout]');
 await me.goto(BASE + '#/login');
 await me.fill('input[name=token]', READONLY);
 await me.click('button[type=submit]');
-await me.waitForSelector('.fab');
-await me.click('.fab');
-await me.setInputFiles('#file', photos.slice(0, 1));
-await me.waitForFunction(() => document.querySelectorAll('.thumb-img').length === 1);
-await me.click('.mood-option[data-mood="1"]');
-await me.click('[data-action=save]');
-await me.waitForFunction(() => document.getElementById('toast').textContent.includes('쓰기 권한'));
-check(await me.locator('.editor').isVisible(), '쓰기 권한 없는 열쇠 → 안내 후 작성 내용 유지');
+await me.waitForSelector('#login-error:not([hidden])');
+check((await me.locator('#login-error').textContent()).includes('쓰기 권한'), '쓰기 권한 없는 열쇠 → 로그인 화면에서 바로 안내');
+check(await me.evaluate(() => !localStorage.getItem('photo-diary-token')), '쓰기 권한 없는 열쇠는 보관하지 않음');
+await me.screenshot({ path: `${SHOTS}/g4-no-write.png` });
 
 // 인터넷 끊김 → 불러오기 실패 화면
 const offline = await newPage();
