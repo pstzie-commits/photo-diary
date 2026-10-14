@@ -1,4 +1,17 @@
 {
  "version": 1,
- "entries": []
+ "entries": [
+  {
+   "id": "4ed096d9-a25d-4d22-8c43-7df1af8928cf",
+   "date": "2026-10-10",
+   "title": "정전주간 캠핑모임",
+   "mood": 1,
+   "memo": "너무 즐거웠습니다^^",
+   "photos": [
+    "374aca03-5ac0-48b7-9eca-7dd40f3192f4.jpg"
+   ],
+   "created_at": "2026-10-14T04:53:58.339Z",
+   "updated_at": "2026-10-14T04:53:58.339Z"
+  }
+ ]
 }
